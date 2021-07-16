@@ -11,27 +11,31 @@ class ViewController: UIViewController {
     
     var cat1 = UIImage(named:"cat1.jpg")!
     var cat2 = UIImage(named:"cat2.jpg")!
+    var cat3 = UIImage(named:"cat3.jpg")!
     
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var go: UIButton!
+    
     @IBAction func forward(_ sender: Any) {
-        if self.timer == nil{
-            if imageView.image == cat1 {
-                imageView.image = cat2
-            } else {
-                imageView.image = cat1
-            }
+        if imageView.image == cat1 {
+            imageView.image = cat2
+        } else if imageView.image == cat2{
+            imageView.image = cat3
+        } else {
+            imageView.image = cat1
         }
     }
     
+    @IBOutlet weak var back: UIButton!
     
     @IBAction func backward(_ sender: Any) {
-        if self.timer == nil{
-            if imageView.image == cat2 {
-                imageView.image = cat1
-            } else {
-                imageView.image = cat2
-            }
+        if imageView.image == cat3 {
+            imageView.image = cat2
+        } else if imageView.image == cat2{
+            imageView.image = cat1
+        } else {
+            imageView.image = cat3
         }
     }
     
@@ -51,10 +55,14 @@ class ViewController: UIViewController {
         if self.timer == nil{
             self.timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(updateTimer(_:)), userInfo: nil, repeats: true)
             playStop.setTitle("停止", for: .normal)
+            go.isEnabled = false
+            back.isEnabled = false
         } else {
             self.timer.invalidate()
             self.timer = nil
             playStop.setTitle("再生", for: .normal)
+            go.isEnabled = true
+            back.isEnabled = true
         }
     }
     
@@ -64,12 +72,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         if photo == cat2{
             imageView.image = cat2
+        } else if photo == cat3 {
+            imageView.image = cat3
         } else {
             imageView.image = cat1
         }
     }
 
     @IBAction func tapAction(_ sender: Any) {
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender:Any?){
@@ -80,7 +91,9 @@ class ViewController: UIViewController {
         } else {
             resultViewController.scaledPhoto = cat2
         }
-            
+         
+        self.timer.invalidate()
+        self.timer = nil
     }
     
     @IBAction func unwind(_ segue: UIStoryboardSegue){

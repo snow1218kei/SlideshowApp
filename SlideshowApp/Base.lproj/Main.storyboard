@@ -65,6 +65,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="back" destination="pQa-t3-LQ5" id="8Lv-Uf-gp6"/>
+                        <outlet property="go" destination="4HD-Ih-xo6" id="bqX-kg-N69"/>
                         <outlet property="imageView" destination="Oph-gI-bOJ" id="acq-P4-Tcl"/>
                         <outlet property="playStop" destination="elL-12-mDZ" id="kI2-Qz-78R"/>
                     </connections>
