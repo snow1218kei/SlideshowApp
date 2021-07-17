@@ -70,13 +70,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if photo == cat2{
-            imageView.image = cat2
-        } else if photo == cat3 {
-            imageView.image = cat3
-        } else {
-            imageView.image = cat1
-        }
+        imageView.image = cat1
     }
 
     @IBAction func tapAction(_ sender: Any) {
@@ -88,12 +82,19 @@ class ViewController: UIViewController {
         let resultViewController:ResultViewController = segue.destination as! ResultViewController
         if imageView.image == cat1{
             resultViewController.scaledPhoto = cat1
-        } else {
+        } else if imageView.image == cat2 {
             resultViewController.scaledPhoto = cat2
+        } else {
+            resultViewController.scaledPhoto = cat3
         }
-         
-        self.timer.invalidate()
-        self.timer = nil
+        
+        if self.timer != nil{
+            self.timer.invalidate()
+            self.timer = nil
+            playStop.setTitle("再生", for: .normal)
+            go.isEnabled = true
+            back.isEnabled = true
+        }
     }
     
     @IBAction func unwind(_ segue: UIStoryboardSegue){
