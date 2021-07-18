@@ -42,10 +42,12 @@ class ViewController: UIViewController {
     var timer: Timer!
     
     @objc func updateTimer(_ timer: Timer){
-        if imageView.image == cat2 {
+        if imageView.image == cat3 {
             imageView.image = cat1
-        } else {
+        } else if imageView.image == cat1{
             imageView.image = cat2
+        } else if imageView.image == cat2{
+            imageView.image = cat3
         }
     }
     
